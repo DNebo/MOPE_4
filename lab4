@@ -1,5 +1,8 @@
+
+
 import numpy as np
 import scipy.stats
+
 
 
 def getSum(*args):
@@ -60,7 +63,7 @@ x_matrix = [
 while 1:  # цикл на проверку однородности дисперсии
     def y_add_el():  # функция увеличения m
         for obj in y_list:
-            obj.append(np.random.randint(y_min, y_max))
+            obj.append(np.random.randint(Y_MIN, Y_MAX))
 
 
     my_list = []
@@ -205,13 +208,14 @@ while 1:  # цикл на проверку однородности диспер
     b3 = numerator_b3 / denominator
     b12 = numerator_b12 / denominator
     b13 = numerator_b13 / denominator
+    b23 = numerator_b23 / denominator
     b123 = numerator_b123 / denominator
 
     print("b\u2080:", "%.2f" % b0, " b\u2081:", "%.2f" % b1, " b\u2082:", "%.2f" % b2, " b\u2083:", "%.2f" % b3, " b\u2081\u2082:", "%.2f" % b12,
-          " b\u2081\u2083:", "%.2f" % b13, " b\u2081\u2082\u2083:", "%.2f" % b123)
+          " b\u2081\u2083:", "%.2f" % b13," b\u2082\u2083:", "%.2f" % b23, " b\u2081\u2082\u2083:", "%.2f" % b123)
 
     print(
-        f"Рівняння регресії: y = {b0:.2f}{b1:+.2f}*x\u2081{b2:+.2f}*x\u2082{b3:+.2f}*x\u2083{b12:+.2f}*x\u2081\u2082{b13:+.2f}*x\u2081\u2083{b123:+.2f}*x\u2081\u2082\u2083")
+        f"Рівняння регресії: y = {b0:.2f}{b1:+.2f}*x\u2081{b2:+.2f}*x\u2082{b3:+.2f}*x\u2083{b12:+.2f}*x\u2081\u2082{b13:+.2f}*x\u2081\u2083{b23:+.2f}*x\u2082\u2083{b123:+.2f}*x\u2081\u2082\u2083")
 
     # find dispersion
     S2 = []
@@ -271,7 +275,7 @@ beta2 = getBeta(2)
 beta3 = getBeta(3)
 
 t_criterion = []
-t_criterion.append(abs(beta0) / Sbeta, )
+t_criterion.append(abs(beta0) / Sbeta)
 t_criterion.append(abs(beta1) / Sbeta)
 t_criterion.append(abs(beta2) / Sbeta)
 t_criterion.append(abs(beta3) / Sbeta)
@@ -302,7 +306,7 @@ y_hat = []
 for i in range(N):
     y_hat.append(
         b0 + b1 * x_matrix[i][0] + b2 * x_matrix[i][1] + b3 * x_matrix[i][2] + b12 * x_matrix[i][0] * x_matrix[i][1] +
-        b13 * x_matrix[i][0] * x_matrix[i][2] + b123 * x_matrix[i][0] * x_matrix[i][1] * x_matrix[i][2])
+        b13 * x_matrix[i][0] * x_matrix[i][2] +b23 * x_matrix[i][1] * x_matrix[i][2]+ b123 * x_matrix[i][0] * x_matrix[i][1] * x_matrix[i][2])
 
     print(f"y{chr(8321+i)}^ = {b0:.2f}{b1:+.2f}*x{chr(8321+i)}\u2081{b2:+.2f}*x{chr(8321+i)}\u2082{b3:+.2f}*x{chr(8321+i)}\u2083{b12:+.2f}*x{chr(8321+i)}\u2081"
           f"*x{chr(8321+i)}\u2082{b13:+.2f}*x{chr(8321+i)}\u2081*x{chr(8321+i)}\u2083{b123:+.2f}*x{chr(8321+i)}\u2081*x{chr(8321+i)}\u2082*x{chr(8321+i)}\u2083 "
